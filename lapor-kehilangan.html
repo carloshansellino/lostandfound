@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lapor Kehilangan - Lost and Found</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Mono&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-light: #fff;
+      --text-light: #000;
+      --bg-dark: #121212;
+      --text-dark: #eee;
+      --input-bg-light: #f9f9f9;
+      --input-bg-dark: #2a2a2a;
+      --btn-bg-light: #000;
+      --btn-text-light: #fff;
+      --btn-bg-dark: #fff;
+      --btn-text-dark: #000;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Fira Mono', monospace;
+      background-color: var(--bg-light);
+      color: var(--text-light);
+      margin: 0; padding: 20px;
+      min-height: 100vh;
+      transition: background-color 0.4s ease, color 0.4s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    h1 {
+      margin-bottom: 0.2em;
+      font-size: 2.5rem;
+      opacity: 0;
+      transform: translateY(-20px);
+      animation: fadeInUp 0.8s forwards 0.2s;
+    }
+    form {
+      max-width: 480px;
+      width: 100%;
+      background-color: var(--input-bg-light);
+      padding: 2em;
+      border-radius: 12px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.1);
+      opacity: 0;
+      transform: translateY(10px);
+      animation: fadeInUp 0.8s forwards 0.5s;
+      transition: background-color 0.3s;
+    }
+    label {
+      display: block;
+      margin-bottom: 0.3em;
+      font-weight: 600;
+      margin-top: 1em;
+    }
+    input[type=text],
+    input[type=email],
+    input[type=tel],
+    input[type=datetime-local],
+    textarea {
+      width: 100%;
+      padding: 0.6em;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-family: 'Fira Mono', monospace;
+      font-size: 1rem;
+      background-color: var(--bg-light);
+      color: var(--text-light);
+      transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+      resize: vertical;
+    }
+    input[type=text]:focus,
+    input[type=email]:focus,
+    input[type=tel]:focus,
+    input[type=datetime-local]:focus,
+    textarea:focus {
+      outline: none;
+      border-color: #666;
+    }
+    textarea {
+      min-height: 80px;
+    }
+    .btn {
+      margin-top: 2em;
+      background-color: var(--btn-bg-light);
+      color: var(--btn-text-light);
+      border: none;
+      padding: 1em 2em;
+      font-size: 1.2rem;
+      cursor: pointer;
+      border-radius: 8px;
+      width: 100%;
+      transition: background-color 0.3s, color 0.3s;
+      user-select: none;
+    }
+    .btn:hover {
+      opacity: 0.85;
+    }
+    .dark-mode {
+      background-color: var(--bg-dark);
+      color: var(--text-dark);
+    }
+    .dark-mode form {
+      background-color: var(--input-bg-dark);
+      box-shadow: none;
+    }
+    .dark-mode input[type=text],
+    .dark-mode input[type=email],
+    .dark-mode input[type=tel],
+    .dark-mode input[type=datetime-local],
+    .dark-mode textarea {
+      background-color: var(--bg-dark);
+      color: var(--text-dark);
+      border-color: #444;
+    }
+    .dark-mode input[type=text]:focus,
+    .dark-mode input[type=email]:focus,
+    .dark-mode input[type=tel]:focus,
+    .dark-mode input[type=datetime-local]:focus,
+    .dark-mode textarea:focus {
+      border-color: #bbb;
+    }
+    .dark-mode .btn {
+      background-color: var(--btn-bg-dark);
+      color: var(--btn-text-dark);
+    }
+    #toggleMode {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: none;
+      border: none;
+      font-size: 1.8rem;
+      cursor: pointer;
+      color: inherit;
+      user-select: none;
+      transition: color 0.3s;
+      z-index: 10;
+    }
+    #backBtn {
+      margin-top: 1em;
+      background: none;
+      border: none;
+      color: inherit;
+      font-family: 'Fira Mono', monospace;
+      cursor: pointer;
+      text-decoration: underline;
+      font-size: 1rem;
+    }
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <button id="toggleMode" aria-label="Toggle Dark/Light Mode" title="Toggle Dark/Light Mode">🌞</button>
+
+  <h1>Lapor Kehilangan</h1>
+
+  <form id="formKehilangan" action="#" method="POST" novalidate>
+    <label for="nama">Nama Pelapor</label>
+    <input type="text" id="nama" name="nama" required placeholder="Nama lengkap" />
+
+    <label for="kontak">Nomor Telepon atau Email</label>
+    <input type="text" id="kontak" name="kontak" required placeholder="0812xxxxxx atau email@example.com" />
+
+    <label for="deskripsi">Deskripsi Barang</label>
+    <textarea id="deskripsi" name="deskripsi" required placeholder="Deskripsikan barang yang hilang..."></textarea>
+
+    <label for="tanggal">Tanggal dan Waktu Kehilangan</label>
+    <input type="datetime-local" id="tanggal" name="tanggal" required />
+
+    <button type="submit" class="btn">Kirim</button>
+  </form>
+
+  <button id="backBtn" onclick="history.back()">← Kembali</button>
+
+  <script>
+    const toggleBtn = document.getElementById('toggleMode');
+    const body = document.body;
+    const form = document.getElementById('formKehilangan');
+
+    function updateIcon() {
+      toggleBtn.textContent = body.classList.contains('dark-mode') ? '🌜' : '🌞';
+    }
+
+    toggleBtn.addEventListener('click', () => {
+      body.classList.toggle('dark-mode');
+      updateIcon();
+      localStorage.setItem('darkMode', body.classList.contains('dark-mode'));
+    });
+
+    if (localStorage.getItem('darkMode') === 'true') {
+      body.classList.add('dark-mode');
+    }
+    updateIcon();
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      alert('Terima kasih, laporan kehilangan sudah diterima!');
+      form.reset();
+    });
+  </script>
+</body>
+</html>

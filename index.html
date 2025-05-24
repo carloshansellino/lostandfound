@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lost and Found</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Mono&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-light: #fff;
+      --text-light: #000;
+      --bg-dark: #121212;
+      --text-dark: #eee;
+      --btn-bg-light: #000;
+      --btn-text-light: #fff;
+      --btn-bg-dark: #fff;
+      --btn-text-dark: #000;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Fira Mono', monospace;
+      background-color: var(--bg-light);
+      color: var(--text-light);
+      margin: 0; padding: 0 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+      transition: background-color 0.4s ease, color 0.4s ease;
+    }
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 0.2em;
+      opacity: 0;
+      transform: translateY(-20px);
+      animation: fadeInUp 0.8s forwards 0.2s;
+    }
+    p.subtitle {
+      font-size: 1.2rem;
+      font-weight: 300;
+      text-transform: lowercase;
+      margin-top: 0; margin-bottom: 2em;
+      opacity: 0;
+      transform: translateY(-10px);
+      animation: fadeInUp 0.8s forwards 0.5s;
+    }
+    .btn {
+      display: inline-block;
+      background-color: var(--btn-bg-light);
+      color: var(--btn-text-light);
+      border: none;
+      padding: 1em 2em;
+      margin: 0 1em 1em 1em;
+      font-size: 1.2rem;
+      cursor: pointer;
+      border-radius: 8px;
+      text-decoration: none;
+      user-select: none;
+      opacity: 0;
+      transform: translateY(10px);
+      animation: fadeInUp 0.8s forwards;
+      animation-delay: 0.8s;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    .btn:hover {
+      opacity: 0.85;
+    }
+    .dark-mode {
+      background-color: var(--bg-dark);
+      color: var(--text-dark);
+    }
+    .dark-mode .btn {
+      background-color: var(--btn-bg-dark);
+      color: var(--btn-text-dark);
+    }
+    #toggleMode {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: none;
+      border: none;
+      font-size: 1.8rem;
+      cursor: pointer;
+      color: inherit;
+      user-select: none;
+      transition: color 0.3s;
+      z-index: 10;
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <button id="toggleMode" aria-label="Toggle Dark/Light Mode" title="Toggle Dark/Light Mode">🌞</button>
+  <h1>Lost and Found</h1>
+  <p class="subtitle">namanya juga manusia, barang hilang wajar kok</p>
+
+  <a href="lapor-penemuan.html" class="btn">Lapor Penemuan</a>
+  <a href="lapor-kehilangan.html" class="btn">Lapor Kehilangan</a>
+
+  <script>
+    const toggleBtn = document.getElementById('toggleMode');
+    const body = document.body;
+
+    function updateIcon() {
+      toggleBtn.textContent = body.classList.contains('dark-mode') ? '🌜' : '🌞';
+    }
+
+    toggleBtn.addEventListener('click', () => {
+      body.classList.toggle('dark-mode');
+      updateIcon();
+      localStorage.setItem('darkMode', body.classList.contains('dark-mode'));
+    });
+
+    if (localStorage.getItem('darkMode') === 'true') {
+      body.classList.add('dark-mode');
+    }
+    updateIcon();
+  </script>
+</body>
+</html>
